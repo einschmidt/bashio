@@ -44,6 +44,24 @@ function bashio::fs.file_exists() {
 }
 
 # ------------------------------------------------------------------------------
+# Check whether or not a file exists and write permission is granted or not.
+#
+# Arguments:
+#   $1 Path to file
+# ------------------------------------------------------------------------------
+function bashio::fs.file_writable() {
+    local file=${1}
+
+    bashio::log.trace "${FUNCNAME[0]}:" "$@"
+
+    if [[ -w "${file}" ]]; then
+        return "${__BASHIO_EXIT_OK}"
+    fi
+
+    return "${__BASHIO_EXIT_NOK}"
+}
+
+# ------------------------------------------------------------------------------
 # Check whether or not a device exists.
 #
 # Arguments:
